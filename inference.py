@@ -77,7 +77,6 @@ def inference():
             
             for i in trange(len(audios),desc='Inferencing '):
                 torchaudio.save(params['inferenceSavePath']+'/'+files[i],generate(g,refiner,audios[i],scheduler.getScheduler(),True,scheduler.getScaler())[0].cpu(),sampleRate)
-            print(scheduler)
        
             
 

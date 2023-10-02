@@ -15,7 +15,7 @@ params=dict(
     learnRateD=2e-4,
     gamma=0.99,
     betas=(0.8,0.99),
-    weightDecay=0.001,
+    weightDecay=0.01,
     trainDataPath='C:/deep_learning/speech_synthesis/LJSPeech/LJSpeech_1.1/wavs',
     generatorPath='./generator.pth',
     refinerPath='./refiner.pth',
@@ -44,11 +44,11 @@ params=dict(
     schedulerTrainDevice='cuda:0',
     
     #params for inference
-    inferenceDataPath='C:\deep_learning\speech_synthesis\wavs',
-    generatorPathInf='./generator.pth',
-    refinerPathInf='./refiner.pth',
+    inferenceDataPath='C:/deep_learning/speech_synthesis/unseen',
+    generatorPathInf='./generatorVCTK.pth',
+    refinerPathInf='./refinerVCTK.pth',
     inferenceDevice='cuda:0',
-    schedulerPathInf='./scheduler.pth',
+    schedulerPathInf='./schedulerVCTK.pth',
     inferenceSavePath='./inference',
     
     #params for model
