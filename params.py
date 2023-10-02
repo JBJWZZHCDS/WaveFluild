@@ -36,11 +36,11 @@ params=dict(
     schedulerStep=4,
     schedulerLearnRate=0.1,
     schedulerTrainBatch=8,
-    generatorPathSch='./generator.pth',
-    refinerPathSch='./refiner.pth',
-    discriminatorPathSch='./discriminator.pth',
-    schedulerPath='./scheduler.pth',
-    schedulerTrainDataPath='C:/deep_learning/speech_synthesis/LJSPeech/LJSpeech_1.1/wavs',
+    generatorPathSch='./generatorVCTK.pth',
+    refinerPathSch='./refinerVCTK.pth',
+    discriminatorPathSch='./discriminatorVCTK.pth',
+    schedulerPath='./schedulerVCTK.pth',
+    schedulerTrainDataPath='C:\deep_learning\speech_synthesis\VCTK_all22050',
     schedulerTrainDevice='cuda:0',
     
     #params for inference
