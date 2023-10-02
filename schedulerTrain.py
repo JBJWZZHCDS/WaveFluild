@@ -81,8 +81,8 @@ def schedulerTrain(mixTraining=False):
             scaler.step(schedulerOptimizer)
             scaler.update()
                 
-            schedulerInfo=[round(one,3) for one in scheduler.getScheduler().detach().cpu().tolist()]
-            scalerInfo=[round(one,3) for one in scheduler.getScaler().detach().cpu().tolist()]
+            schedulerInfo=[round(one,2) for one in scheduler.getScheduler().detach().cpu().tolist()]
+            scalerInfo=[round(one,2) for one in scheduler.getScaler().detach().cpu().tolist()]
             #print(scheduler.grad,scheduler.requires_grad)
             tqdmLoader.set_postfix(gF=gF,gMel=gMel,gFeature=gFeature,gDwt=gDwt,scheduler=schedulerInfo,scaler=scalerInfo)
 
