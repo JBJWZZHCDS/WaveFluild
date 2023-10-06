@@ -302,11 +302,11 @@ def generate(generator,refiner,mels,steps=None,fixFirst=False,scaler=None):
             deltaTime=time*(1-steps[i])
             predicted=refiner(x,audiosPre,time,mels)
             velocity=(predicted-x)/time.unsqueeze(-1) 
-            if scaler!=None:
-                deltaTime=deltaTime*scaler[i]
-            x=x+velocity*deltaTime.unsqueeze(-1)
             time=time-deltaTime
-        
+            if scaler!=None:
+                velocity=velocity*scaler[i]
+            x=x+velocity*deltaTime.unsqueeze(-1)
+            
         predicted=refiner(x,audiosPre,time,mels)
         return (predicted+audiosPre)/2
            
@@ -314,10 +314,10 @@ class Scheduler(nn.Module):
     def __init__(self,step=params['schedulerStep']):
         super().__init__()
         self.scheduler=nn.Parameter(torch.rand(step-1)*(params['timeDecayUp']-params['timeDecayDown'])+params['timeDecayDown'])
-        self.scaler=nn.Parameter(torch.rand(step-1)+0.5)
+        self.scaler=nn.Parameter(torch.ones(step-1))
     def clamp(self):
-        self.scheduler.data.clamp_(0,1)
-        self.scaler.data.clamp_(0,2)
+        self.scheduler.data.clamp_(0.025,1)
+        self.scaler.data.clamp_(0.05,1.9)
             
     
     def getScheduler(self):

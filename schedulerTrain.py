@@ -45,6 +45,7 @@ def schedulerTrain(mixTraining=False):
     scaler=torch.cuda.amp.GradScaler(enabled=mixTraining)
     dwt=DWT(4)
     g.train()
+    count=0
     for epoch in range(0,epochs):
         tqdmLoader=tqdm(trainLoader,desc=f'scheduler Train Epoch: {epoch}')
         g.setDropKey(False)
@@ -84,10 +85,11 @@ def schedulerTrain(mixTraining=False):
             schedulerInfo=[round(one,2) for one in scheduler.getScheduler().detach().cpu().tolist()]
             scalerInfo=[round(one,2) for one in scheduler.getScaler().detach().cpu().tolist()]
             #print(scheduler.grad,scheduler.requires_grad)
+            scheduler.clamp()
             tqdmLoader.set_postfix(gF=gF,gMel=gMel,gFeature=gFeature,gDwt=gDwt,scheduler=schedulerInfo,scaler=scalerInfo)
 
-            #scheduler.clamp()
-        torch.save(scheduler,params['schedulerPath'])
+
+        torch.save(scheduler.state_dict(),params['schedulerPath'])
 
 
 if __name__=='__main__':
